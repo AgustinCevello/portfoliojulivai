@@ -1,42 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Reset básico para asegurar que la página ocupe todo el ancho */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: #f2f2f7; /* Color de fondo iOS */
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Animación de entrada para los Modales */
+.animate-in {
+  animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes logo-spin {
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* Ocultar scrollbars pero mantener funcionalidad de scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Efecto suave para las imágenes al cargar */
+img {
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Estilo para los botones cuando se presionan (efecto click) */
+.active-scale:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+
+/* Mejoras visuales para el iframe de Calendly */
+iframe {
+  border-radius: 1.5rem;
+}
+
+/* Ajuste para que las tarjetas Bento se vean bien en pantallas pequeñas */
+@media (max-width: 640px) {
+  .grid-cols-2 {
+    gap: 1rem;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
