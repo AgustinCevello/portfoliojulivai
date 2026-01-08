@@ -1,60 +1,84 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Award, LayoutGrid } from 'lucide-react';
-import { PROJECTS } from '../constantes';
+import React from 'react';
+import { ExternalLink, Target, Zap, BarChart3 } from 'lucide-react';
+
+const PROJECTS_DATA = [
+  {
+    title: "App Growth & PM",
+    company: "Pinta Libre",
+    metrics: { reach: "+20%", conversion: "Alta", type: "App" },
+    description: "Rol de Project Manager e implementación de estrategias 360. Activaciones de Street Marketing y campañas de Paid Media para impulsar suscripciones.",
+    tasks: ["Project Management", "Paid Media (Ads)", "Street Activations", "Email Marketing"],
+    result: "Aumento significativo en la tasa de descarga mediante campañas hiper-segmentadas."
+  },
+  {
+    title: "E-Commerce & CM",
+    company: "Chillhouse",
+    metrics: { followers: "18.8k", posts: "155", interaction: "Alta" },
+    description: "Gestión integral de marca. Aplicación de pauta publicitaria y optimización de identidad visual para muebles de diseño argentino.",
+    tasks: ["Identidad Visual", "Creación de Contenido", "Plan de Marketing", "Pauta Publicitaria"],
+    result: "Consolidación de comunidad con identidad visual coherente que refuerza la confianza de compra."
+  },
+  {
+    title: "Prensa & Viralización",
+    company: "Arq. Rubén Díaz",
+    metrics: { reach: "8.8k", interactions: "459", viral: "Sí" },
+    description: "Coordinación de prensa para obras icónicas. Gestión de hitos virales como la vinculación con la serie 'Emily in Paris' de Netflix.",
+    tasks: ["Prensa y Difusión", "Gestión de Redes", "Coordinación con TV", "Viralización"],
+    result: "Alcance masivo en redes y cobertura en medios nacionales de televisión."
+  }
+];
 
 const ProjectsApp = () => {
-  const [selectedProject, setSelectedProject] = useState(null);
+  return (
+    <div className="p-6 space-y-8 bg-gray-50 min-h-full">
+      {PROJECTS_DATA.map((project, i) => (
+        <div key={i} className="bg-white rounded-[2.5rem] p-8 shadow-sm border border-gray-100 overflow-hidden">
+          <div className="flex justify-between items-start mb-6">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-500 bg-blue-50 px-3 py-1 rounded-full">
+                {project.company}
+              </span>
+              <h3 className="text-2xl font-black text-gray-900 mt-3 uppercase tracking-tighter italic">
+                {project.title}
+              </h3>
+            </div>
+            <Zap className="text-yellow-400" size={24} fill="currentColor" />
+          </div>
 
-  if (selectedProject) {
-    return (
-      <div className="flex flex-col min-h-full bg-white animate-in slide-in-from-right duration-300">
-        <div className="bg-[#444444] py-4 px-8 text-white">
-          <h2 className="text-3xl font-extrabold tracking-tight">{selectedProject.title}</h2>
-        </div>
-        <div className="relative h-64 md:h-80 w-full shrink-0">
-          <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-full object-cover" />
-          <button 
-            onClick={() => setSelectedProject(null)}
-            className="absolute top-4 left-4 bg-white/30 backdrop-blur-md p-2 rounded-full text-white hover:bg-white/50 transition-colors"
-          >
-            <ArrowLeft size={24} />
-          </button>
-        </div>
-        <div className="p-8 md:p-10 space-y-10">
-          <div className="flex justify-between border-b border-gray-100 pb-8 overflow-x-auto gap-8 no-scrollbar">
-            {Object.entries(selectedProject.stats).map(([key, value], i) => (
-              <div key={i} className="text-center min-w-[100px]">
-                <p className="text-2xl font-extrabold text-[#1c1c1e]">{value}</p>
-                <p className="text-[10px] text-gray-400 uppercase tracking-[0.15em] font-bold mt-1">{key}</p>
+          {/* Mini Dashboard de Métricas */}
+          <div className="grid grid-cols-3 gap-4 mb-8 bg-gray-50 p-4 rounded-3xl">
+            {Object.entries(project.metrics).map(([key, val]) => (
+              <div key={key} className="text-center">
+                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{key}</p>
+                <p className="text-sm font-bold text-gray-900">{val}</p>
               </div>
             ))}
           </div>
-          <div>
-            <h3 className="font-extrabold text-[#1c1c1e] mb-4 text-xl tracking-tight">Sobre el proyecto</h3>
-            <p className="text-gray-600 leading-relaxed text-base font-medium">{selectedProject.fullDesc}</p>
+
+          <div className="space-y-4">
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {project.description}
+            </p>
+            
+            <div className="flex flex-wrap gap-2">
+              {project.tasks.map(task => (
+                <span key={task} className="text-[10px] font-bold bg-gray-100 text-gray-600 px-3 py-1 rounded-lg">
+                  {task}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-6 pt-6 border-t border-gray-50">
+              <div className="flex items-start gap-3">
+                <BarChart3 className="text-emerald-500 mt-1" size={18} />
+                <p className="text-sm font-bold text-gray-800 italic">
+                  "{project.result}"
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="p-8 md:p-10 space-y-8 bg-white">
-      <h3 className="text-3xl font-extrabold text-[#1c1c1e] tracking-tight">Mis Proyectos</h3>
-      <div className="flex flex-col gap-6">
-        {PROJECTS.map((proj) => (
-          <div key={proj.id} onClick={() => setSelectedProject(proj)} className="group bg-white rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-lg transition-all cursor-pointer overflow-hidden flex flex-col md:flex-row">
-            <div className="h-48 md:h-60 md:w-56 shrink-0 relative">
-              <img src={proj.image} alt={proj.title} className="w-full h-full object-cover" />
-            </div>
-            <div className="p-8">
-              <span className="text-[10px] font-extrabold text-[#007AFF] bg-blue-50 px-3 py-1.5 rounded-md uppercase">{proj.category}</span>
-              <h3 className="text-xl font-extrabold mt-2">{proj.title}</h3>
-              <p className="text-gray-500 text-sm mt-2">{proj.shortDesc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
   );
 };

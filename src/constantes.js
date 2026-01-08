@@ -1,100 +1,142 @@
-import fotoPerfil from './assets/images/FotoPerfil.png';
-import imgLaFabbrica from './assets/images/LaFabbrica.jpg';
-import imgPintaLibre from './assets/images/PintaLibre.jpg';
+// src/constantes.js
+import perfilFoto from './assets/images/FotoPerfil.png';
 import bannerCamara from './assets/images/BannerCamara.png';
-
-// Importaciones de Fotografía - Editorial
-import fotoHombre1 from './assets/images/FotoHombre1.jpg';
-import fotoHombre2 from './assets/images/FotoHombre2.jpg'; // Corregido el .jpg.jpg del nombre
-import fotoHombre3 from './assets/images/FotoHombre3.jpg';
-
-// Importaciones de Fotografía - Personal
-import fotoDiploma1 from './assets/images/FotoDiploma1.jpg';
-import fotoDiploma2 from './assets/images/FotoDiploma2.jpg';
+import logoBrillos from './assets/logos/Brillos.png';
+import laFabbricaImg from './assets/images/LaFabbrica.png';
+import fotoHombre1 from './assets/images/FotoHombre1.png';
+import fotoHombre2 from './assets/images/FotoHombre2.png';
+import fotoHombre3 from './assets/images/FotoHombre3.png';
+import fotoDiploma1 from './assets/images/FotoDiploma1.png';
+import fotoDiploma2 from './assets/images/FotoDiploma2.png';
 
 export const ASSETS = {
+  laFabbrica: laFabbricaImg,
   bannerCamara: bannerCamara,
+  logoBrillos: logoBrillos
+};
+
+export const PROFILE = {
+  name: "Julieta Vai",
+  role: "Publicista & Fotógrafa",
+  subRole: "Especialista en Marketing & Contenido",
+  image: perfilFoto,
+  bio: "Especialista en capturar momentos y potenciar marcas a través de una mirada creativa y estratégica. Con experiencia en entornos de alto rendimiento como TyC Sports y startups en crecimiento.",
+  email: "julietavaistudio@gmail.com", // Mail actualizado
+  instagram: "@juliivai - @vai.stttudio",
+  phone: "+54 9 11 3806-4329",
+  linkedin: "linkedin.com/in/julieta-vai-studio"
 };
 
 export const CALENDLY_URL = "https://calendly.com/julietaaldanavai/first-meeting";
 
-export const PROFILE = {
-  name: "Julieta Vai",
-  role: "Community & Project Manager",
-  subRole: "Fotógrafa Profesional",
-  email: "julietaaldanavai@gmail.com",
-  instagram: "@juliivai",
-  phone: "11-38064329",
-  bio: "El arte atrae visualmente y la psicología impacta el inconsciente. Combino estos conceptos para lograr emprendimientos exitosos.",
-  location: "Buenos Aires, Argentina",
-  image: fotoPerfil, // Se usa la imagen local importada
-};
-
-export const PROJECTS = [
+export const EXPERIENCE = [
   {
-    id: "fabbrica",
-    title: "La Fabbrica",
-    category: "GASTRONOMÍA & RRSS",
-    image: imgLaFabbrica, // Foto de La Fabbrica
-    stats: { interaction: "Media-Alta", posts: "90", conversion: "Reservas" },
-    shortDesc: "Gestión de redes y estética visual para restaurante italiano.",
-    fullDesc: "Manejo integral de la presencia digital de La Fabbrica. Enfoque en 'food styling' y generación de deseo mediante contenido visual de alta calidad.",
-    tasks: ["Food Styling", "Community Management", "Ads Locales", "Fotografía Gastronómica"],
-    results: "Incremento sostenido en las consultas por reservas vía Instagram y consolidación de una estética gourmet."
+    period: "2023 - Actualidad",
+    role: "Content Creator & Photographer",
+    company: "TyC Sports",
+    color: "bg-blue-500",
+    details: [
+      "Cobertura fotográfica de eventos deportivos",
+      "Generación de contenido creativo para redes sociales",
+      "Edición y montaje de material audiovisual de alto impacto"
+    ]
   },
   {
-    id: "pinta-libre",
-    title: "Pinta Libre",
-    category: "MARKETING APP",
-    image: imgPintaLibre, // Foto de Pinta Libre
-    stats: { reach: "+50k", followers: "15k", conversion: "Alta" },
-    shortDesc: "Crecimiento de comunidad y estrategias de fidelización.",
-    fullDesc: "Desarrollo de campañas de adquisición de usuarios y gestión de alianzas estratégicas para la app de beneficios gastronómicos.",
-    tasks: ["Growth Marketing", "Social Media Strategy", "Influencer Marketing"],
-    results: "Crecimiento del 40% en la base de suscriptores activos en Buenos Aires."
+    period: "2023 - Actualidad",
+    role: "App Growth & Project Manager",
+    company: "Pinta Libre",
+    color: "bg-green-500",
+    details: [
+      "Implementación de estrategias 360 y Street Marketing",
+      "Campañas de Paid Media (Retargeting) en Meta Ads",
+      "Resultados: +20% en Reach y aumento de conversiones"
+    ]
+  },
+  {
+    period: "2023 - 2024",
+    role: "E-commerce & Community Manager",
+    company: "Chillhouse",
+    color: "bg-orange-500",
+    details: [
+      "Gestión integral de marca y pauta publicitaria",
+      "Consolidación de comunidad de 19k seguidores",
+      "Optimización de embudos de venta y reportes mensuales"
+    ]
+  },
+  {
+    period: "Prensa & Viralización",
+    role: "Prensa y CM",
+    company: "Arq. Rubén Díaz",
+    color: "bg-purple-500",
+    details: [
+      "Gestión de hitos virales vinculados a Netflix (Emily in Paris)",
+      "Coordinación con medios nacionales de TV",
+      "Alcance masivo y posicionamiento de obras icónicas"
+    ]
   }
 ];
 
-export const EXPERIENCE = [
+export const SKILLS_DATA = [
   {
-    company: "TyC Sports",
-    role: "Content Creator & Photographer",
-    period: "2023 - Actualidad",
-    color: "bg-blue-500",
-    details: ["Cobertura fotográfica de eventos deportivos", "Generación de contenido para redes sociales", "Edición de material audiovisual"]
+    title: "Marketing & Estrategia",
+    icon: "award", // Usaremos lógica para asignar el icono de Lucide
+    color: "text-purple-500",
+    bg: "bg-purple-50",
+    items: ["Psicología del Consumidor", "Plan de Marketing", "Briefing", "Identidad Visual", "Meta Ads (2025)", "Email Marketing"]
   },
   {
-    company: "Pinta Libre",
-    role: "Community Manager Senior",
-    period: "2021 - 2023",
-    color: "bg-orange-500",
-    details: ["Liderazgo del equipo de redes", "Estrategia de comunicación digital", "Análisis de métricas y KPI de crecimiento"]
+    title: "Multimedia & Diseño",
+    icon: "camera",
+    color: "text-pink-500",
+    bg: "bg-pink-50",
+    items: ["Adobe Premiere", "After Effects", "CapCut", "Photoshop", "Lightroom", "Illustrator", "Canva"]
+  },
+  {
+    title: "E-commerce & Logística",
+    icon: "shopping-cart",
+    color: "text-blue-500",
+    bg: "bg-blue-50",
+    items: ["Tienda Nube", "MercadoLibre", "Zippin", "Oca", "Cruz del Sur"]
+  },
+  {
+    title: "Idiomas",
+    icon: "languages",
+    color: "text-emerald-500",
+    bg: "bg-emerald-50",
+    items: ["Inglés Británico (B2 Cambridge)", "Español (Nativo)"]
   }
 ];
 
 export const EDUCATION = [
   {
-    school: "Universidad de Palermo",
-    degree: "Licenciatura en Publicidad",
+    degree: "Fotógrafa Profesional",
+    school: "Foto Evolución",
+    year: "2022 - 2024"
+  },
+  {
+    degree: "Lic. en Publicidad",
+    school: "ISEC",
+    year: "2022 - En curso"
+  },
+  {
+    degree: "Marketing Digital",
+    school: "CoderHouse",
     year: "2022"
   },
   {
-    school: "Brother Buenos Aires",
-    degree: "Creatividad Publicitaria",
-    year: "2020"
+    degree: "Bachiller en Economía",
+    school: "ECEA",
+    year: "2016 - 2021"
   }
 ];
 
-export const SKILLS = [
-  "Social Media Strategy",
-  "Fotografía Profesional",
-  "Psicología del Consumidor",
-  "Diseño Gráfico (Adobe Suite)",
-  "Community Management",
-  "Ads (Meta & Google)",
-  "Food Styling",
-  "Copywriting Creativo"
-];
+// He categorizado las habilidades para que el modal se vea ordenado
+export const SKILLS_CATEGORIES = {
+  marketing: ["Psicología del Consumidor", "Plan de Marketing", "Briefing", "Identidad Visual", "Meta Ads (2025)", "Email Marketing"],
+  multimedia: ["Adobe Premiere", "After Effects", "CapCut", "Photoshop", "Lightroom", "Illustrator", "Canva"],
+  ecommerce: ["Tienda Nube", "MercadoLibre", "Zippin", "Oca", "Cruz del Sur"],
+  languages: ["Inglés Británico (B2 Cambridge)", "Español (Nativo)"]
+};
 
 export const PHOTOS = {
   editorial: [
@@ -110,3 +152,5 @@ export const PHOTOS = {
   producto: [],
   publicidad: []
 };
+
+export const PROJECTS = [];
