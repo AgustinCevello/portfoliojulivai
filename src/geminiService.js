@@ -21,7 +21,7 @@ export const getGeminiResponse = async (userMessage) => {
     return response.text();
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Lo siento, tuve un problema procesando tu consulta.";
+    return "Estamos trabajando en ello"; 
   }
 };
 

@@ -1,3 +1,21 @@
+import fotoPerfil from './assets/images/FotoPerfil.png';
+import imgLaFabbrica from './assets/images/LaFabbrica.jpg';
+import imgPintaLibre from './assets/images/PintaLibre.jpg';
+import bannerCamara from './assets/images/BannerCamara.png';
+
+// Importaciones de Fotografía - Editorial
+import fotoHombre1 from './assets/images/FotoHombre1.jpg';
+import fotoHombre2 from './assets/images/FotoHombre2.jpg'; // Corregido el .jpg.jpg del nombre
+import fotoHombre3 from './assets/images/FotoHombre3.jpg';
+
+// Importaciones de Fotografía - Personal
+import fotoDiploma1 from './assets/images/FotoDiploma1.jpg';
+import fotoDiploma2 from './assets/images/FotoDiploma2.jpg';
+
+export const ASSETS = {
+  bannerCamara: bannerCamara,
+};
+
 export const CALENDLY_URL = "https://calendly.com/julietaaldanavai/first-meeting";
 
 export const PROFILE = {
@@ -9,7 +27,7 @@ export const PROFILE = {
   phone: "11-38064329",
   bio: "El arte atrae visualmente y la psicología impacta el inconsciente. Combino estos conceptos para lograr emprendimientos exitosos.",
   location: "Buenos Aires, Argentina",
-  image: "https://via.placeholder.com/150", // Aquí luego pondremos la foto real
+  image: fotoPerfil, // Se usa la imagen local importada
 };
 
 export const PROJECTS = [
@@ -17,7 +35,7 @@ export const PROJECTS = [
     id: "fabbrica",
     title: "La Fabbrica",
     category: "GASTRONOMÍA & RRSS",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+    image: imgLaFabbrica, // Foto de La Fabbrica
     stats: { interaction: "Media-Alta", posts: "90", conversion: "Reservas" },
     shortDesc: "Gestión de redes y estética visual para restaurante italiano.",
     fullDesc: "Manejo integral de la presencia digital de La Fabbrica. Enfoque en 'food styling' y generación de deseo mediante contenido visual de alta calidad.",
@@ -28,7 +46,7 @@ export const PROJECTS = [
     id: "pinta-libre",
     title: "Pinta Libre",
     category: "MARKETING APP",
-    image: "https://images.unsplash.com/photo-1538333581680-d0397361e421?w=800",
+    image: imgPintaLibre, // Foto de Pinta Libre
     stats: { reach: "+50k", followers: "15k", conversion: "Alta" },
     shortDesc: "Crecimiento de comunidad y estrategias de fidelización.",
     fullDesc: "Desarrollo de campañas de adquisición de usuarios y gestión de alianzas estratégicas para la app de beneficios gastronómicos.",
@@ -80,11 +98,15 @@ export const SKILLS = [
 
 export const PHOTOS = {
   editorial: [
-    { url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800", title: "Retrato Editorial Moda" },
-    { url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800", title: "Fashion Portrait" }
+    { url: fotoHombre1, title: "Producción Editorial Masculina I" },
+    { url: fotoHombre2, title: "Producción Editorial Masculina II" },
+    { url: fotoHombre3, title: "Producción Editorial Masculina III" }
+  ],
+  personal: [
+    { url: fotoDiploma1, title: "Entrega de Diploma I" },
+    { url: fotoDiploma2, title: "Entrega de Diploma II" }
   ],
   eventos: [],
   producto: [],
-  publicidad: [],
-  personal: []
+  publicidad: []
 };
