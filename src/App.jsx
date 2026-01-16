@@ -142,7 +142,7 @@ function App() {
               role="button"
               tabIndex={0}
               aria-label="Ver experiencia laboral"
-              className="col-span-1 row-span-2 bg-gradient-to-br from-[#8E2DE2] to-[#7020c4] rounded-[3rem] p-7 text-white flex flex-col justify-between cursor-pointer hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-purple-200/50 hover:shadow-2xl hover:shadow-purple-300/60 hover:-translate-y-1"
+              className="col-span-1 row-span-2 bg-gradient-to-br from-[#8E2DE2] via-[#4A00E0] to-[#7020c4] bg-[length:200%_200%] animate-gradient-slow rounded-[3rem] p-7 text-white flex flex-col justify-between cursor-pointer hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-xl shadow-purple-200/50 hover:shadow-2xl hover:shadow-purple-300/60 hover:-translate-y-1"
           >
             <div className="bg-white/25 backdrop-blur-sm w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110">
               <Briefcase size={26} strokeWidth={2} />
@@ -193,11 +193,11 @@ function App() {
             role="button"
             tabIndex={0}
             aria-label="Ver proyectos"
-            className="col-span-2 bg-gray-200 rounded-[3rem] relative overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
+            className="col-span-2 bg-gray-200 rounded-[3rem] relative overflow-hidden cursor-pointer group shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 isolate transform-gpu"
           >
             <img 
               src={ASSETS.laFabbrica || "/placeholder.svg"}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-125 transition-transform duration-[1200ms] ease-out" 
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out will-change-transform" 
               alt="Proyectos" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent group-hover:from-black/70 transition-all duration-500 flex items-center justify-center">
@@ -208,28 +208,31 @@ function App() {
           </div>
 
           {/* Photography Card */}
-          {/* <CHANGE> Refinado el overlay y animación de imagen */}
           <div 
             onClick={() => setActiveApp('photography')} 
             role="button"
             tabIndex={0}
             aria-label="Ver galería de fotografía"
-            className="col-span-2 bg-black rounded-[3rem] p-8 text-white flex flex-col justify-between relative cursor-pointer group shadow-2xl overflow-hidden hover:scale-[1.02] active:scale-[0.99] transition-all duration-500 hover:-translate-y-1"
+            className="col-span-2 bg-black rounded-[3rem] p-8 text-white flex flex-col justify-between relative cursor-pointer group shadow-2xl overflow-hidden isolate transform-gpu hover:scale-[1.02] active:scale-[0.99] transition-all duration-500 hover:-translate-y-1"
           >
+            {/* Imagen de fondo con corrección de recorte */}
             <img 
               src={ASSETS.bannerCamara || "/placeholder.svg"} 
               alt="Fotografía" 
-              className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-110 transition-all duration-[2000ms]" 
+              className="absolute inset-0 w-full h-full object-cover opacity-50 z-0 group-hover:opacity-70 group-hover:scale-110 transition-all duration-[2000ms] ease-out will-change-transform" 
             />
             
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20 group-hover:from-black/80 transition-all duration-700"></div>
+            {/* Overlay gradiente - Ajustado para ser más profundo y evitar el tono gris */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[1] opacity-80 group-hover:opacity-90 transition-opacity duration-700"></div>
 
+            {/* Contenido Superior (Ícono) */}
             <div className="relative z-10">
               <div className="bg-white/15 backdrop-blur-md w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-white/25 group-hover:scale-110 transition-all duration-300">
                 <Camera size={26} strokeWidth={2} />
               </div>
             </div>
 
+            {/* Contenido Inferior (Texto) */}
             <div className="relative z-10 flex justify-between items-end">
               <div>
                 <h3 className="text-3xl font-extrabold tracking-tight leading-tight">Fotografía</h3>
