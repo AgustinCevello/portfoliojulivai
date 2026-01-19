@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, X } from 'lucide-react';
 
+// Componente de ícono de carga
+const LoadingIcon = ({ className = "" }) => (
+  <svg 
+    fill="hsl(270, 60%, 35%)" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+  >
+    <path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z">
+      <animateTransform 
+        attributeName="transform" 
+        type="rotate" 
+        dur="0.75s" 
+        values="0 12 12;360 12 12" 
+        repeatCount="indefinite"
+      />
+    </path>
+  </svg>
+);
+
 const PhotographyApp = ({ photos }) => {
   const [selectedAlbum, setSelectedAlbum] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loadedImages, setLoadedImages] = useState({});
 
   // EFECTO PARA BLOQUEAR SCROLL
   useEffect(() => {
-    // Si estamos dentro de un álbum o viendo una foto, bloqueamos el scroll del fondo
     if (selectedAlbum || selectedImage) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
 
-    // Limpieza al cerrar el componente
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, [selectedAlbum, selectedImage]);
+
+  // Función para manejar cuando una imagen se carga
+  const handleImageLoad = (albumId) => {
+    setLoadedImages(prev => ({ ...prev, [albumId]: true }));
+  };
 
   // Definición de los álbumes
   const albums = [
@@ -41,9 +65,26 @@ const PhotographyApp = ({ photos }) => {
               onClick={() => setSelectedAlbum(album.id)}
               className="cursor-pointer group"
             >
-              <div className="aspect-square rounded-[2rem] overflow-hidden bg-[#121212] mb-4 flex items-center justify-center border border-white/5 transition-transform active:scale-95">
+              <div className="aspect-square rounded-[2rem] overflow-hidden bg-[#121212] mb-4 flex items-center justify-center border border-white/5 transition-transform active:scale-95 relative">
                 {album.img ? (
-                  <img src={album.img} className="w-full h-full object-cover" alt={album.title} />
+                  <>
+                    {/* Ícono de carga - solo visible mientras la imagen carga */}
+                    {!loadedImages[album.id] && (
+                      <div className="absolute inset-0 flex items-center justify-center z-20 bg-[#121212]">
+                        <LoadingIcon className="w-12 h-12 opacity-60" />
+                      </div>
+                    )}
+                    
+                    {/* Imagen con transición de opacidad */}
+                    <img 
+                      src={album.img} 
+                      className={`w-full h-full object-cover transition-opacity duration-500 ${
+                        loadedImages[album.id] ? 'opacity-100' : 'opacity-0'
+                      }`}
+                      alt={album.title}
+                      onLoad={() => handleImageLoad(album.id)}
+                    />
+                  </>
                 ) : (
                   <span className="text-gray-800 font-bold italic text-sm uppercase">Vacío</span>
                 )}
