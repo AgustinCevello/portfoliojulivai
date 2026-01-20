@@ -59,7 +59,12 @@ const PhotographyApp = ({ onProjectsLoad }) => {
     };
   }, [selectedAlbum, selectedImage]);
 
-  // GHOST LOADING (SKELETON)
+  // Función para limpiar el nombre (Elimina .jpg, .png, etc. y pone en mayúsculas)
+  const limpiarNombreArchivo = (texto) => {
+    if (!texto) return "";
+    return texto.split('.')[0].toUpperCase();
+  };
+
   if (loading) {
     return (
       <div className="min-h-full p-8">
@@ -81,21 +86,16 @@ const PhotographyApp = ({ onProjectsLoad }) => {
     );
   }
 
-  // Transformar objeto de Drive con lógica de split "!"
   const albums = drivePhotos ? Object.keys(drivePhotos).map(key => {
     const partes = key.split('!');
-    const tituloPrincipal = partes[0].trim().toUpperCase();
-    const subtitulo = partes[1] ? partes[1].trim().toUpperCase() : "PROYECTO";
-
     return {
       id: key,
-      title: tituloPrincipal,
-      sub: subtitulo,
+      title: partes[0].trim().toUpperCase(),
+      sub: partes[1] ? partes[1].trim().toUpperCase() : "PROYECTO",
       img: drivePhotos[key][0]?.url
     };
   }) : [];
 
-  /** VISTA PRINCIPAL: GRILLA DE PROYECTOS **/
   if (!selectedAlbum) {
     return (
       <div className="min-h-full p-8 animate-in fade-in duration-500">
@@ -104,7 +104,7 @@ const PhotographyApp = ({ onProjectsLoad }) => {
           {albums.map((album) => (
             <div key={album.id} onClick={() => setSelectedAlbum(album.id)} className="cursor-pointer group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-[2.2rem] opacity-0 group-hover:opacity-50 blur-xl transition-all duration-500 group-hover:duration-200"></div>
-              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-[#121212] mb-4 border border-white/5 transition-all duration-500 group-hover:border-white/20 group-hover:scale-[1.02] group-active:scale-95 shadow-2xl">
+              <div className="relative aspect-square rounded-[2rem] overflow-hidden bg-[#121212] mb-4 border border-white/5 transition-all duration-500 group-hover:border-white/20 group-hover:scale-[1.02] shadow-2xl">
                 {album.img ? (
                   <OptimizedImage src={album.img} alt={album.title} />
                 ) : (
@@ -128,9 +128,8 @@ const PhotographyApp = ({ onProjectsLoad }) => {
     );
   }
 
-  /** VISTA DETALLE: FOTOS DENTRO DE UN PROYECTO **/
   return (
-    <div className="bg-black min-h-full animate-in slide-in-from-right-4 duration-300 p-8">
+    <div className="min-h-full animate-in slide-in-from-right-4 duration-300 p-8">
       <button 
         onClick={() => setSelectedAlbum(null)} 
         className="flex items-center text-gray-500 hover:text-white transition-colors gap-1 text-[10px] font-black uppercase tracking-widest mb-6"
@@ -138,7 +137,6 @@ const PhotographyApp = ({ onProjectsLoad }) => {
         <ChevronLeft size={14} /> Volver
       </button>
 
-      {/* Encabezado dinámico con Split "!" */}
       <div className="mb-8">
         <h3 className="text-white font-black text-4xl uppercase tracking-tighter italic leading-none">
           {selectedAlbum.split('!')[0].trim()}
@@ -156,7 +154,7 @@ const PhotographyApp = ({ onProjectsLoad }) => {
               <OptimizedImage src={photo.url} alt={photo.title} />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                 <p className="text-white font-bold text-[9px] leading-tight uppercase tracking-widest">
-                  {photo.title}
+                  {limpiarNombreArchivo(photo.title)}
                 </p>
               </div>
             </div>
@@ -167,23 +165,25 @@ const PhotographyApp = ({ onProjectsLoad }) => {
       {/* LIGHTBOX */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex flex-col animate-in fade-in zoom-in-95 duration-300" 
+          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-300" 
           onClick={() => setSelectedImage(null)}
         >
-          <div className="flex justify-end p-8">
-            <button className="p-3 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors">
-              <X size={24}/>
-            </button>
-          </div>
-          <div className="flex-1 p-6 flex flex-col items-center justify-center">
+          <button className="absolute top-8 right-8 p-3 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors z-[210]">
+            <X size={24}/>
+          </button>
+          
+          <div className="relative w-full h-full flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <img 
               src={selectedImage.url} 
-              className="max-w-full max-h-[75vh] object-contain rounded-[2rem] shadow-2xl border border-white/10" 
-              alt={selectedImage.title} 
+              className="max-w-full max-h-[85vh] object-contain rounded-[1rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/5" 
+              alt={selectedImage.title}
             />
-            <p className="text-white font-black text-sm mt-8 uppercase tracking-widest italic text-center px-4">
-              {selectedImage.title}
-            </p>
+            
+            <div className="mt-6 text-center">
+              <p className="text-white font-black text-sm uppercase tracking-widest italic">
+                {limpiarNombreArchivo(selectedImage.title)}
+              </p>
+            </div>
           </div>
         </div>
       )}
