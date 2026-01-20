@@ -130,18 +130,23 @@ const PhotographyApp = ({ onProjectsLoad }) => {
 
   return (
     <div className="min-h-full animate-in slide-in-from-right-4 duration-300 p-8">
+      {/* BOTÓN VOLVER - MÁS GRANDE Y ANIMADO */}
       <button 
         onClick={() => setSelectedAlbum(null)} 
-        className="flex items-center text-gray-500 hover:text-white transition-colors gap-1 text-[10px] font-black uppercase tracking-widest mb-6"
+        className="group flex items-center text-gray-400 hover:text-white transition-all duration-300 gap-3 text-sm font-black uppercase tracking-[0.25em] mb-10 cursor-pointer"
       >
-        <ChevronLeft size={14} /> Volver
+        <ChevronLeft 
+          size={24} 
+          className="group-hover:-translate-x-2 transition-transform duration-300" 
+        /> 
+        <span>Volver atrás</span>
       </button>
 
-      <div className="mb-8">
-        <h3 className="text-white font-black text-4xl uppercase tracking-tighter italic leading-none">
+      <div className="mb-10">
+        <h3 className="text-white font-black text-5xl uppercase tracking-tighter italic leading-none">
           {selectedAlbum.split('!')[0].trim()}
         </h3>
-        <p className="text-purple-500 font-bold text-xs uppercase tracking-[0.2em] mt-2">
+        <p className="text-purple-500 font-bold text-sm uppercase tracking-[0.3em] mt-3">
           {selectedAlbum.split('!')[1]?.trim() || "GALERÍA"}
         </p>
       </div>
@@ -162,26 +167,28 @@ const PhotographyApp = ({ onProjectsLoad }) => {
         ))}
       </div>
 
-      {/* LIGHTBOX */}
+      {/* LIGHTBOX (VISOR DE IMAGEN A PANTALLA COMPLETA) */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-300" 
           onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center animate-in fade-in duration-300" 
+          style={{
+            cursor: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>") 16 16, pointer`
+          }}
         >
-          <button className="absolute top-8 right-8 p-3 bg-white/10 rounded-full text-white hover:bg-white/20 transition-colors z-[210]">
-            <X size={24}/>
-          </button>
-          
-          <div className="relative w-full h-full flex flex-col items-center justify-center" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-[90%] h-[85%] flex flex-col items-center justify-center">
             <img 
               src={selectedImage.url} 
-              className="max-w-full max-h-[85vh] object-contain rounded-[1rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/5" 
+              className="w-auto h-auto max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-white/5" 
               alt={selectedImage.title}
             />
             
-            <div className="mt-6 text-center">
-              <p className="text-white font-black text-sm uppercase tracking-widest italic">
+            <div className="mt-8 text-center select-none">
+              <h4 className="text-white font-black text-sm uppercase tracking-[0.3em] italic opacity-80">
                 {limpiarNombreArchivo(selectedImage.title)}
+              </h4>
+              <p className="text-white/20 text-[8px] font-bold uppercase tracking-[0.4em] mt-2">
+                Click para cerrar
               </p>
             </div>
           </div>
