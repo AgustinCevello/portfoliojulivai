@@ -3,11 +3,6 @@ import perfilFoto from './assets/images/FotoPerfil.png';
 import bannerCamara from './assets/images/BannerCamara.png';
 import logoBrillos from './assets/logos/Brillos.png';
 import laFabbricaImg from './assets/images/LaFabbrica.png';
-import fotoHombre1 from './assets/images/FotoHombre1.png';
-import fotoHombre2 from './assets/images/FotoHombre2.png';
-import fotoHombre3 from './assets/images/FotoHombre3.png';
-import fotoDiploma1 from './assets/images/FotoDiploma1.png';
-import fotoDiploma2 from './assets/images/FotoDiploma2.png';
 
 export const ASSETS = {
   laFabbrica: laFabbricaImg,
@@ -138,6 +133,7 @@ export const SKILLS_CATEGORIES = {
   languages: ["Inglés Británico (B2 Cambridge)", "Español (Nativo)"]
 };
 
+/*
 export const PHOTOS = {
   editorial: [
     { url: fotoHombre1, title: "Producción Editorial Masculina I" },
@@ -152,5 +148,6 @@ export const PHOTOS = {
   producto: [],
   publicidad: []
 };
+*/
 
 export const PROJECTS = [];

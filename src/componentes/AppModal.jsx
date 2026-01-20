@@ -3,7 +3,8 @@
 import { useEffect } from "react"
 import { X } from "lucide-react"
 
-const AppModal = ({ title, children, onClose, colorClass = "bg-white", count, fullHeight = false }) => {
+// Agregamos 'isGallery' a las propiedades
+const AppModal = ({ title, children, onClose, colorClass = "bg-white", count, fullHeight = false, isGallery = false }) => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow
     document.body.style.overflow = "hidden"
@@ -38,7 +39,8 @@ const AppModal = ({ title, children, onClose, colorClass = "bg-white", count, fu
       className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/50 backdrop-blur-xl animate-in fade-in duration-300"
     >
       <div
-        className={`w-full max-w-2xl max-h-[90vh] ${fullHeight ? "h-[90vh]" : "h-fit"} ${colorClass} rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border ${colorClass.includes("bg-black") ? "border-white/20" : "border-gray-200/50"} relative flex flex-col overflow-hidden transition-all duration-500 ease-out transform scale-100 animate-in zoom-in-90 slide-in-from-bottom-8`}
+        /* CAMBIO AQUÍ: Si es galería usa max-w-5xl, si no, sigue usando max-w-2xl */
+        className={`w-full ${isGallery ? "max-w-5xl" : "max-w-2xl"} max-h-[90vh] ${fullHeight ? "h-[90vh]" : "h-fit"} ${colorClass} rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border ${colorClass.includes("bg-black") ? "border-white/20" : "border-gray-200/50"} relative flex flex-col overflow-hidden transition-all duration-500 ease-out transform scale-100 animate-in zoom-in-90 slide-in-from-bottom-8`}
       >
         <div
           className={`shrink-0 h-16 ${colorClass.includes("bg-black") ? "bg-black/90 border-white/10 text-white" : "bg-white/90 border-gray-200/50 text-gray-900"} backdrop-blur-xl flex items-center justify-between px-8 border-b z-20 transition-colors duration-300`}

@@ -5,7 +5,7 @@ import AppModal from './componentes/AppModal';
 import ProjectsApp from './componentes/ProjectsApp';
 import PhotographyApp from './componentes/PhotographyApp';
 import AiAssistantApp from './componentes/AiAssistantApp';
-import { PROFILE, EXPERIENCE, EDUCATION, SKILLS_DATA, CALENDLY_URL, ASSETS, PHOTOS } from './constantes';
+import { PROFILE, EXPERIENCE, EDUCATION, SKILLS_DATA, CALENDLY_URL, ASSETS } from './constantes';
 import BrillosIcon from './assets/logos/Brillos.png';
 import SkillsApp from './componentes/SkillsApp';
 
@@ -14,6 +14,9 @@ function App() {
   const [activeApp, setActiveApp] = useState(null);
   const isAdmin = false;
   const [isImageExpanded, setIsImageExpanded] = useState(false);
+  
+  // ✅ NUEVO: Estado para el contador dinámico de proyectos
+  const [projectsCount, setProjectsCount] = useState(0);
 
   // --- EFECTO 1: RELOJ ---
   useEffect(() => {
@@ -48,7 +51,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f2f2f7] via-[#f9f9fb] to-[#f2f2f7] text-[#1c1c1e] flex justify-center overflow-x-hidden font-sans p-4 md:p-12 relative">
-      {/* <CHANGE> Añadido patrón de fondo sutil para profundidad visual */}
       <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(0,0,0) 1px, transparent 0)', backgroundSize: '40px 40px' }} />
       
       <div className="w-full max-w-4xl relative z-10">
@@ -62,7 +64,6 @@ function App() {
             aria-modal="true"
             aria-label="Imagen de perfil ampliada"
           >
-            {/* <CHANGE> Añadido rol y aria-label para accesibilidad, backdrop-blur mejorado */}
             <div className="relative max-w-2xl w-full aspect-square">
               <img 
                 src={PROFILE.image || "/placeholder.svg"} 
@@ -81,7 +82,6 @@ function App() {
         )}
 
         {/* Status Bar */}
-        {/* <CHANGE> Mejorado contraste y refinado el diseño del status bar */}
         <div className="flex justify-between items-center mb-10 px-6 text-gray-900 text-[13px] font-bold">
           <div className="flex items-center gap-2.5">
             <span className="tracking-tight">{formatTime(currentTime)}</span> 
@@ -99,11 +99,9 @@ function App() {
         </div>
 
         {/* Bento Grid */}
-        {/* <CHANGE> Mejorados gaps y transiciones para mejor fluidez visual */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-5 auto-rows-fr">
           
           {/* Profile Card */}
-          {/* <CHANGE> Añadido hover state más prominente y transiciones suaves */}
           <div className="col-span-2 row-span-2 bg-white rounded-[3rem] p-8 shadow-lg hover:shadow-xl transition-all duration-500 flex flex-col justify-between relative overflow-hidden group border border-gray-100/50 hover:scale-[1.01] hover:-translate-y-1">
               
               <div className="absolute top-0 right-0 w-36 h-36 bg-gradient-to-bl from-gray-50 to-transparent rounded-bl-[120px] -z-0 opacity-80"></div>
@@ -136,7 +134,6 @@ function App() {
           </div>
 
           {/* Experiencia */}
-          {/* <CHANGE> Mejorados efectos hover y estados de interacción */}
           <div 
               onClick={() => setActiveApp('experience')} 
               role="button"
@@ -151,7 +148,6 @@ function App() {
           </div>
 
           {/* Estudios */}
-          {/* <CHANGE> Añadidos estados hover más dinámicos */}
           <div 
               onClick={() => setActiveApp('education')} 
               role="button"
@@ -169,7 +165,6 @@ function App() {
           </div>
 
           {/* Habilidades */}
-          {/* <CHANGE> Mejorada la interactividad visual */}
           <div 
               onClick={() => setActiveApp('skills')} 
               role="button"
@@ -187,7 +182,6 @@ function App() {
           </div>
 
           {/* Portafolio Preview */}
-          {/* <CHANGE> Mejorado efecto parallax y overlay */}
           <div 
             onClick={() => setActiveApp('projects')} 
             role="button"
@@ -215,24 +209,20 @@ function App() {
             aria-label="Ver galería de fotografía"
             className="col-span-2 bg-black rounded-[3rem] p-8 text-white flex flex-col justify-between relative cursor-pointer group shadow-2xl overflow-hidden isolate transform-gpu hover:scale-[1.02] active:scale-[0.99] transition-all duration-500 hover:-translate-y-1"
           >
-            {/* Imagen de fondo con corrección de recorte */}
             <img 
               src={ASSETS.bannerCamara || "/placeholder.svg"} 
               alt="Fotografía" 
               className="absolute inset-0 w-full h-full object-cover opacity-50 z-0 group-hover:opacity-70 group-hover:scale-110 transition-all duration-[2000ms] ease-out will-change-transform" 
             />
             
-            {/* Overlay gradiente - Ajustado para ser más profundo y evitar el tono gris */}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-[1] opacity-80 group-hover:opacity-90 transition-opacity duration-700"></div>
 
-            {/* Contenido Superior (Ícono) */}
             <div className="relative z-10">
               <div className="bg-white/15 backdrop-blur-md w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-white/25 group-hover:scale-110 transition-all duration-300">
                 <Camera size={26} strokeWidth={2} />
               </div>
             </div>
 
-            {/* Contenido Inferior (Texto) */}
             <div className="relative z-10 flex justify-between items-end">
               <div>
                 <h3 className="text-3xl font-extrabold tracking-tight leading-tight">Fotografía</h3>
@@ -247,7 +237,6 @@ function App() {
           </div>
 
           {/* AI Assistant */}
-          {/* <CHANGE> Mejorado gradiente y animaciones */}
           <div 
             onClick={() => setActiveApp('ai-assistant')} 
             role="button"
@@ -275,7 +264,6 @@ function App() {
           </div>
 
           {/* Calendly */}
-          {/* <CHANGE> Mejorado gradiente y efectos visuales */}
           <div 
               onClick={() => setActiveApp('calendly')} 
               role="button"
@@ -292,7 +280,6 @@ function App() {
           </div>
 
           {/* Tarjeta de Contacto Destacada */}
-          {/* <CHANGE> Refinados efectos de brillo y animaciones de iconos */}
           <div 
             onClick={() => setActiveApp('contact')} 
             role="button"
@@ -360,10 +347,11 @@ function App() {
         <AppModal 
           title="Galería" 
           onClose={() => setActiveApp(null)} 
-          count={Object.values(PHOTOS).flat().length}
-          colorClass="bg-white"
+          count={projectsCount}
+          colorClass="bg-black text-white" 
+          isGallery={true} 
         >
-          <PhotographyApp photos={PHOTOS} isAdmin={isAdmin} />
+          <PhotographyApp onProjectsLoad={setProjectsCount} />
         </AppModal>
       )}
 
@@ -379,7 +367,6 @@ function App() {
 
       {activeApp === 'experience' && (
         <AppModal title="Trayectoria" onClose={() => setActiveApp(null)}>
-          {/* <CHANGE> Mejorado spacing y diseño de timeline */}
           <div className="p-10 space-y-8 bg-gradient-to-b from-gray-50 to-white min-h-full">
             {EXPERIENCE.map((job, i) => (
               <div key={i} className="border-l-[3px] border-gray-200 pl-8 relative group hover:border-purple-300 transition-colors duration-300">
@@ -407,7 +394,6 @@ function App() {
           onClose={() => setActiveApp(null)} 
           count={EDUCATION.length}
         >
-          {/* <CHANGE> Mejorado diseño de cards educativos */}
           <div className="p-10 space-y-5 bg-gradient-to-b from-gray-50 to-white min-h-full">
             {EDUCATION.map((edu, i) => (
               <div key={i} className="bg-white border border-gray-200 p-7 rounded-[2.5rem] flex justify-between items-center shadow-md hover:shadow-xl hover:scale-[1.01] hover:-translate-y-1 transition-all duration-300 group">
@@ -441,7 +427,6 @@ function App() {
 
       {activeApp === 'contact' && (
         <AppModal title="Contacto" onClose={() => setActiveApp(null)}>
-          {/* <CHANGE> Mejorado diseño de modal de contacto con mejor jerarquía visual */}
           <div className="flex flex-col items-center text-center p-10 bg-gradient-to-b from-gray-50 via-white to-gray-50 min-h-full">
             
             <div className="relative mb-8 group">
