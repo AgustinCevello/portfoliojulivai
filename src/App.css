@@ -1,4 +1,4 @@
-/* Reset básico para asegurar que la página ocupe todo el ancho */
+/* App.css*/
 html, body {
   margin: 0;
   padding: 0;
@@ -53,4 +53,36 @@ iframe {
   .grid-cols-2 {
     gap: 1rem;
   }
+}
+
+/* --- Efecto Ghost Loading (Shimmer) --- */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Esta clase es la que usamos en PhotographyApp.jsx */
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* --- Utilidades para el GalleryModal --- */
+
+/* Oculta el scrollbar en la galería para una experiencia más inmersiva */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Suaviza la aparición del resplandor (glow) en los proyectos */
+.group:hover .blur-xl {
+  transition: opacity 0.5s ease, filter 0.5s ease;
 }

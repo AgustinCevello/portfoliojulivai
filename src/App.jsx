@@ -8,6 +8,7 @@ import AiAssistantApp from './componentes/AiAssistantApp';
 import { PROFILE, EXPERIENCE, EDUCATION, SKILLS_DATA, CALENDLY_URL, ASSETS } from './constantes';
 import BrillosIcon from './assets/logos/Brillos.png';
 import SkillsApp from './componentes/SkillsApp';
+import GalleryModal from './componentes/GalleryModal';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -344,15 +345,13 @@ function App() {
       )}
 
       {activeApp === 'photography' && (
-        <AppModal 
-          title="Galería" 
+        <GalleryModal 
+          title="Fotografía" 
           onClose={() => setActiveApp(null)} 
           count={projectsCount}
-          colorClass="bg-black text-white" 
-          isGallery={true} 
         >
           <PhotographyApp onProjectsLoad={setProjectsCount} />
-        </AppModal>
+        </GalleryModal>
       )}
 
       {activeApp === 'ai-assistant' && (
